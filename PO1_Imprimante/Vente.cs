@@ -38,6 +38,11 @@ namespace PO1_Imprimante
         }
         public Bitmap GenererCodeQR()
         {
+            QRCodeGenerator codeQRCodeGenerator = new QRCodeGenerator();
+            QRCodeData qRCodeData = codeQRCodeGenerator.CreateQrCode(representation.Film.Nom,QRCodeGenerator.ECCLevel.Q);
+            QRCode qRCode = new QRCode(qRCodeData);
+            Bitmap qrCodeImage =  qRCode.GetGraphic(6);
+            return qrCodeImage;
 
         }
     }

@@ -11,7 +11,7 @@ namespace PO1_Imprimante
         List<Salle> salles = new List<Salle>();
         List<Film> films = new List<Film>();
         List<Representation> representations = new List<Representation>();
-
+        Imprimante imprimante = new Imprimante();   
         public Controleur()
         {
             //endroit pour remplir les controle a l'ouverture du programme
@@ -63,6 +63,8 @@ namespace PO1_Imprimante
                 throw new Exception("Impossible d'effectuer cette vente, car cela dépasse la capacité de la salle");
             }
             representationPourVente.NombreBilletsVendus += nombreBilletEnfant + nombreBilletGeneral;
+            Vente venteAImprimer = new Vente(representationPourVente,nombreBilletEnfant,nombreBilletGeneral);
+            imprimante.Imprimer(venteAImprimer);
         }
 
     }

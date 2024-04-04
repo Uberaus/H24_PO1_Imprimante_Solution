@@ -14,8 +14,8 @@ namespace PO1_Imprimante
             InitializeComponent();
             controlleur = new Controleur();
             bindingSourceRepresentation = new BindingSource();
-            /*bindingSourceRepresentation.DataSource = controlleur.Representations;
-            listBox_Representation.DataSource = bindingSourceRepresentation;*/
+            bindingSourceRepresentation.DataSource = controlleur.Representations;
+            listBox_Representation.DataSource = bindingSourceRepresentation;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace PO1_Imprimante
             Representation representation = listBox_Representation.SelectedItem as Representation;
             if (representation == null)
             {
-                errorProvider_Vente.SetError(this.listBox_Representation, "Vous devez sélectionner une représentation");
+                errorProvider_Vente.SetError(this.listBox_Representation, "Vous devez sï¿½lectionner une reprï¿½sentation");
                 erreur = true;
             }
             else
@@ -69,7 +69,7 @@ namespace PO1_Imprimante
             if (!erreur)
             {
                 try { 
-                    //controlleur.VendreBillet(nbBilletsEnfants, nbBilletsGenerales, representation);
+                    controlleur.VendreBillet(nbBilletsEnfants, nbBilletsGenerales, representation);
                     textBox_vendreBilletGenerale.Clear();
                     textBox_vendreBilletEnfant.Clear();
                     bindingSourceRepresentation.ResetBindings(false);

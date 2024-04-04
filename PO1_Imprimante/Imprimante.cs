@@ -13,7 +13,8 @@ namespace PO1_Imprimante
     {
 
         Font printFont;
-        private void Imprimer()
+        Vente vente;
+        public void Imprimer(Vente venteImprimer)
         {
             try
             {
@@ -21,6 +22,7 @@ namespace PO1_Imprimante
                 {
                     printFont = new Font("Arial", 10);
                     PrintDocument pd = new PrintDocument();
+                    pd.PrinterSettings.PrinterName = "Microsoft Print to PDF";
                     pd.PrintPage += new PrintPageEventHandler
                        (this.pd_PrintPage);
                     pd.Print();
@@ -46,11 +48,17 @@ namespace PO1_Imprimante
             //logo
             //toute la representation
             // + nb billet enfant + nb billet general + CodeQR
-
-            yPos = topMargin + (count *
-               printFont.GetHeight(ev.Graphics));
-            ev.Graphics.DrawString(line, printFont, Brushes.Black,
-               leftMargin, yPos, new StringFormat());
+            List<string> linesAImprimer = vente.GenererBillet(); 
+            foreach(string LigneAImprimer in linesAImprimer)
+            {
+                yPos = topMargin + (count *
+             printFont.GetHeight(ev.Graphics));
+                ev.Graphics.DrawString(line, printFont, Brushes.Black,
+                   leftMargin, yPos, new StringFormat());
+            }
+            Bitmap codeQR = vente.GenererCodeQR();
+            ev.Graphics.DrawImage(codeQR, leftMargin, yPos, 180, 180);
+          
 
 
 
