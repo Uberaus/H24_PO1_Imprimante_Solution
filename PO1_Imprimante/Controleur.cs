@@ -44,5 +44,26 @@ namespace PO1_Imprimante
             return false;
         }
 
+        public void VendreBillet(int nombreBilletEnfant, int nombreBilletGeneral, Representation representationPourVente)
+        {
+            //verif avec age
+            //nombre de place
+
+            if (representationPourVente.Film.ClassementFilm == Film.Classement.TreizeEtPlus ||
+                representationPourVente.Film.ClassementFilm == Film.Classement.SeizeEtPlus ||
+                representationPourVente.Film.ClassementFilm == Film.Classement.DixHuitEtPlus)
+            {
+                if (nombreBilletEnfant > 0)
+                {
+                    throw new Exception("Impossible de vendre des billets enfants pour un film avec ce classement");
+                }
+            }
+            if (representationPourVente.NombreBilletsVendus + nombreBilletEnfant + nombreBilletGeneral > representationPourVente.Salle.NombreDePlace)
+            {
+                throw new Exception("Impossible d'effectuer cette vente, car cela dépasse la capacité de la salle");
+            }
+            representationPourVente.NombreBilletsVendus += nombreBilletEnfant + nombreBilletGeneral;
+        }
+
     }
 }
